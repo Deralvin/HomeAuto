@@ -1,7 +1,10 @@
 package id.co.comapny.pptik.homeauto;
 
+import id.co.comapny.pptik.homeauto.ConsumerRMQ;
 import android.content.Context;
+import android.os.Build;
 import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.Color;
@@ -22,6 +25,7 @@ import java.util.concurrent.TimeoutException;
 
 public class MainActivity extends AppCompatActivity {
     public boolean checkOnOff;
+    ConsumerRMQ consumer = new ConsumerRMQ();
     Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,15 +173,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
 
                     tv.setBackgroundColor(Color.GREEN);
                     tv.setText("LAMP is ON");
-                    checkOnOff = true;
                     try {
-                        AndroidToRMQOn();
+                        String dataSendType = "on_lamp";
+                        AndroidToRMQLamp(dataSendType);
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (KeyManagementException e) {
@@ -190,14 +195,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     // pmg.dataOn();
-//                    Toast.makeText(context, "Lamp ON", Toast.LENGTH_LONG).show();
+
                 }else{
                     tv.setBackgroundColor(Color.RED);
                     tv.setText("LAMP is OFF");
                     checkOnOff = false;
                    // pmg.dataOff();
                     try {
-                        AndroidToRMQOff();
+                        String dataSendType = "off_lamp";
+                        AndroidToRMQLamp(dataSendType);
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (KeyManagementException e) {
@@ -215,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public  void  AndroidToRMQOn() throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException, IOException, TimeoutException {
+    public  void  AndroidToRMQLamp(String dataSendType) throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException, IOException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUri("amqp://homeauto:homeauto12345!@167.205.7.226");
@@ -228,46 +234,23 @@ public class MainActivity extends AppCompatActivity {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
+        if (dataSendType == "off_lamp"){
+            String messageOn = "off" ;
+            channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
+            System.out.println("published mesasge"  + messageOn);
+        }else if (dataSendType == "on_lamp"){
+            String messageOn = "on" ;
+            channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
-       // channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
-
-       // System.out.println("published mesasge"  + messageOn);
-        //channel.queueDeclare("homeauto",true,false,false,null);
-
-        String messageOn = "on" ;
-        channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
-
-        System.out.println("published mesasge"  + messageOn);
-
-
-
-
-    }
-    public  void  AndroidToRMQOff() throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException, IOException, TimeoutException {
-
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setUri("amqp://homeauto:homeauto12345!@167.205.7.226");
-        factory.setVirtualHost("/homeauto");
-        //factory.setUri("amqp://guest:guest@localhost");
-        factory.setConnectionTimeout(3000000);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
-
+            System.out.println("published mesasge"  + messageOn);
+        }
 
         // channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
         // System.out.println("published mesasge"  + messageOn);
         //channel.queueDeclare("homeauto",true,false,false,null);
 
-        String messageOn = "off`" ;
-        channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
-
-        System.out.println("published mesasge"  + messageOn);
 
     }
 }
