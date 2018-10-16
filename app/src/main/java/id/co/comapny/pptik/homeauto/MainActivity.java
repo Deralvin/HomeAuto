@@ -27,9 +27,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean checkOnOff;
     ConsumerRMQ consumer = new ConsumerRMQ();
     Context context = this;
+    SendFanRMQ sendFanRMQ = new SendFanRMQ();
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        ConsumerFuntion();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TextView tv = (TextView) findViewById(R.id.tv);
@@ -122,12 +126,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ka1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+
+                    fanSendMessageFuntion("fan1On");
+
                     txtKa1.setBackgroundColor(Color.GREEN);
                     txtKa1.setText("FAN 1 is ON");
                 }else{
+                    fanSendMessageFuntion("fan1Off");
+
                     txtKa1.setBackgroundColor(Color.RED);
                     txtKa1.setText("FAN 1 is OFF");
                 }
@@ -135,12 +145,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ka2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    fanSendMessageFuntion("fan2On");
+
                     txtKa2.setBackgroundColor(Color.GREEN);
                     txtKa2.setText("FAN 2 is ON");
                 }else{
+                    fanSendMessageFuntion("fan2Off");
+
                     txtKa2.setBackgroundColor(Color.RED);
                     txtKa2.setText("FAN 2 is OFF");
                 }
@@ -148,12 +163,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ka3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    fanSendMessageFuntion("fan3On");
+
                     txtKa3.setBackgroundColor(Color.GREEN);
                     txtKa3.setText("FAN 3 is ON");
                 }else{
+                    fanSendMessageFuntion("fan3Off");
+
                     txtKa3.setBackgroundColor(Color.RED);
                     txtKa3.setText("FAN 3 is OFF");
                 }
@@ -161,12 +181,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ka4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    fanSendMessageFuntion("fan4On");
+
                     txtKa4.setBackgroundColor(Color.GREEN);
                     txtKa4.setText("FAN 4 is ON");
                 }else{
+                    fanSendMessageFuntion("fan4Off");
+
                     txtKa4.setBackgroundColor(Color.RED);
                     txtKa4.setText("FAN 4 is OFF");
                 }
@@ -245,12 +270,187 @@ public class MainActivity extends AppCompatActivity {
 
             System.out.println("published mesasge"  + messageOn);
         }
-
         // channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
         // System.out.println("published mesasge"  + messageOn);
         //channel.queueDeclare("homeauto",true,false,false,null);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void fanSendMessageFuntion(String ParamNumberFan){
+        /////////////////////////////////////////fan 1
+         if (ParamNumberFan == "fan1On"){
+            String fanParam = "FanOneOn";
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }else  if (ParamNumberFan == "fan1Off"){
+            String fanParam = "FanOneOff";
+
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
 
+        /////////////////////////////////////////fan 2
+        else  if (ParamNumberFan == "fan2On"){
+            String fanParam = "FanTwoOn";
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else  if (ParamNumberFan == "fan2Off"){
+            String fanParam = "FanTwoOff";
+
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+         ///////////////////////////////////////////fan 3
+        else  if (ParamNumberFan == "fan3On"){
+            String fanParam = "FanThreeOn";
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else  if (ParamNumberFan == "fan3Off"){
+            String fanParam = "FanThreeOff";
+
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+         ///////////////////////////////////////// //fan 4
+        else  if (ParamNumberFan == "fan4On"){
+            String fanParam = "FanFourOn";
+            try {
+                sendFanRMQ.sendRMQFan(fanParam);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else  if (ParamNumberFan == "fan4Off") {
+             String fanParam = "FanFourOff";
+
+             try {
+                 sendFanRMQ.sendRMQFan(fanParam);
+             } catch (NoSuchAlgorithmException e) {
+                 e.printStackTrace();
+             } catch (KeyManagementException e) {
+                 e.printStackTrace();
+             } catch (URISyntaxException e) {
+                 e.printStackTrace();
+             } catch (IOException e) {
+                 e.printStackTrace();
+             } catch (TimeoutException e) {
+                 e.printStackTrace();
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
+         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void ConsumerFuntion(){
+        try {
+            consumer.ConsumerDataRMQ();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
