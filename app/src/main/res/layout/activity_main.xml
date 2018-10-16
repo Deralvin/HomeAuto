@@ -1,44 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Hello World!" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="85dp"
+            android:text="All"
+            android:textSize="25dp" />
 
-        android:layout_alignParentEnd="true"
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="145dp"
+            android:text="Lampu"
 
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="385dp"
-        android:padding="15dp"
-        android:text="On Off The Switch"
-        android:textSize="25dp" />
+            android:textSize="25dp" />
+        <TextView
+            android:id="@+id/txtKai1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="208dp"
+            android:text="Kipas 1"
 
-    <Switch
-        android:id="@+id/lamp"
+            android:textSize="25dp" />
+        <TextView
+            android:id="@+id/txtKai2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="270dp"
+            android:text="Kipas 2"
 
-        android:layout_width="83dp"
-        android:layout_height="61dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginLeft="41dp"
-        android:layout_marginTop="62dp"
-        android:checked="true" />
+            android:textSize="25dp" />
+        <TextView
+            android:id="@+id/txtKai3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="333dp"
+            android:text="Kipas 3"
 
-</RelativeLayout>
+            android:textSize="25dp" />
+        <TextView
+            android:id="@+id/txtKai4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="395dp"
+            android:text="Kipas 4"
+
+            android:textSize="25dp" />
+
+        <Switch
+            android:id="@+id/kai1"
+            android:layout_width="83dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/lamp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="1dp"
+            android:checked="false"  />
+        <Switch
+            android:id="@+id/kai2"
+            android:layout_width="83dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/kai1"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="1dp"
+            android:checked="false"  />
+        <Switch
+            android:id="@+id/kai3"
+            android:layout_width="83dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/kai2"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="1dp"
+            android:checked="false"  />
+        <Switch
+            android:id="@+id/kai4"
+            android:layout_width="83dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/kai3"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="1dp"
+            android:checked="false"  />
+
+        <Switch
+            android:id="@+id/lamp"
+
+            android:layout_width="83dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/all"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="1dp"
+            android:checked="false" />
+
+        <Switch
+            android:id="@+id/all"
+
+            android:layout_width="83dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="72dp"
+            android:checked="false" />
+
+    </RelativeLayout>
+
+</LinearLayout>
