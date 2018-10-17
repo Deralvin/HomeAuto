@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 if(isChecked){
                     txtKa1.setBackgroundColor(Color.GREEN);
                     txtKa1.setText("FAN 1 is ON");
+
                 }else{
                     txtKa1.setBackgroundColor(Color.RED);
                     txtKa1.setText("FAN 1 is OFF");
