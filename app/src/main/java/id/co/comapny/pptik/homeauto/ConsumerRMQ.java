@@ -37,7 +37,7 @@ public class ConsumerRMQ {
 
         QueueingConsumer consumer =  new QueueingConsumer(channel);
 
-        channel.basicConsume("homeautomation",false,consumer);
+        channel.basicConsume("homeAutoTest",false,consumer);
 
 
         QueueingConsumer.Delivery delivery = consumer.nextDelivery();
@@ -46,7 +46,7 @@ public class ConsumerRMQ {
             try{
 
                 String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                System.out.println("Message Consumed" + message);
+                System.out.println("Message Consumed      " + message);
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 
             }catch (Exception e){
