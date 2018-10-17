@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     ConsumerRMQ consumer = new ConsumerRMQ();
     Context context = this;
     SendFanRMQ sendFanRMQ = new SendFanRMQ();
+    SendAllRMQ sendAllRMQ = new SendAllRMQ();
+    public boolean BoolAllChecked;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
 
+                    BoolAllChecked  = true;
 
                     tv.setBackgroundColor(Color.GREEN);
                     tv.setText("LAMP is ON");
@@ -99,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                     ka4.setClickable(false);
 
                 }else{
+
+                    BoolAllChecked  = false;
+
                     tv.setBackgroundColor(Color.RED);
                     tv.setText("LAMP is OFF");
                     sb.setChecked(false);
@@ -188,15 +194,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    fanSendMessageFuntion("fan4On");
-
-                    txtKa4.setBackgroundColor(Color.GREEN);
-                    txtKa4.setText("FAN 4 is ON");
+                    if (BoolAllChecked == true){
+                        publishRMQAll();
+                    }else{
+                        fanSendMessageFuntion("fan4On");
+                        txtKa4.setBackgroundColor(Color.GREEN);
+                        txtKa4.setText("FAN 4 is ON");
+                    }
                 }else{
-                    fanSendMessageFuntion("fan4Off");
+                    if (BoolAllChecked == false){
+                        publishRMQAll();
+                    }else {
+                        fanSendMessageFuntion("fan4Off");
 
-                    txtKa4.setBackgroundColor(Color.RED);
-                    txtKa4.setText("FAN 4 is OFF");
+                        txtKa4.setBackgroundColor(Color.RED);
+                        txtKa4.setText("FAN 4 is OFF");
+                    }
                 }
             }
         });
@@ -269,11 +282,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("published mesasge"  + messageOn);
         }else if (dataSendType == "on_lamp"){
             String messageOn = "on" ;
-            channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
-
-            System.out.println("published mesasge"  + messageOn);
-        }else if(dataSendType == "sendAll"){
-            String messageOn = "AllOn" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
             System.out.println("published mesasge"  + messageOn);
@@ -451,6 +459,26 @@ public class MainActivity extends AppCompatActivity {
     public void ConsumerFuntion(){
         try {
             consumer.ConsumerDataRMQ();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void publishRMQAll(){
+        try {
+            String send = "sendAll";
+            sendAllRMQ.sendAll(send);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (KeyManagementException e) {
