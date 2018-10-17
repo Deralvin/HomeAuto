@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+
+
                     tv.setBackgroundColor(Color.GREEN);
                     tv.setText("LAMP is ON");
                     sb.setChecked(true);
@@ -270,6 +272,11 @@ public class MainActivity extends AppCompatActivity {
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
             System.out.println("published mesasge"  + messageOn);
+        }else if(dataSendType == "sendAll"){
+            String messageOn = "AllOn" ;
+            channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
+
+            System.out.println("published mesasge"  + messageOn);
         }
         // channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
 
@@ -318,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
         /////////////////////////////////////////fan 2
         else  if (ParamNumberFan == "fan2On"){
             String fanParam = "FanTwoOn";
@@ -358,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
          ///////////////////////////////////////////fan 3
         else  if (ParamNumberFan == "fan3On"){
             String fanParam = "FanThreeOn";
@@ -396,6 +405,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+
          ///////////////////////////////////////// //fan 4
         else  if (ParamNumberFan == "fan4On"){
             String fanParam = "FanFourOn";

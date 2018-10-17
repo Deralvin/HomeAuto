@@ -34,35 +34,36 @@ public class SendFanRMQ {
 
         //send message TO RMQ
         if (fanParam == "FanOneOn"){
-            String messageOn = "KaOn" ;
+            String messageOn = "KAon" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
+
         }else if (fanParam == "FanOneOff"){
-            String messageOn = "KaOff" ;
+            String messageOn = "KAoff" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
 
         //FAN 2
         else if (fanParam == "FanTwoOn"){
-            String messageOn = "KbOn" ;
+            String messageOn = "KBon" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
         else if (fanParam == "FanTwoOff"){
-            String messageOn = "KbOff" ;
+            String messageOn = "KBoff" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
 
         //FAN 3
         else if (fanParam == "FanThreeOn"){
-            String messageOn = "KcOn" ;
+            String messageOn = "KCon" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
         else if (fanParam == "FanThreeOff"){
-            String messageOn = "KcOff" ;
+            String messageOn = "KCoff" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
@@ -70,14 +71,18 @@ public class SendFanRMQ {
 
         //FAN 4
         else if (fanParam == "FanFourOn"){
-            String messageOn = "KdOn" ;
+            String messageOn = "KDon" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
         else if (fanParam == "FanFourOff"){
-            String messageOn = "KdOff" ;
+            String messageOn = "Kdoff" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
         }
+    }
+
+    public void SendSpeed() throws InterruptedException {
+        Thread.sleep(500); //0.5 sec
     }
 }
