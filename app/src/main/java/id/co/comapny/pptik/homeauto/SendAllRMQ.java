@@ -31,12 +31,16 @@ public class SendAllRMQ {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        if (allParam == "sendAll"){
+        if (allParam == "sendAllTrue"){
             String messageOn = "AllOn" ;
             channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
             //System.out.println("published mesasge"  + messageOn);
 
+        }else if(allParam == "sendAllFalse"){
+            String messageOn = "AllOff" ;
+            channel.basicPublish("amq.topic","homeauto",null,messageOn.getBytes());
         }
+
 
 
     }
